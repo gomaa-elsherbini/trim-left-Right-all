@@ -54,36 +54,40 @@ string readString()
 //	}
 //}
 
-string TrimLeftString(string str, char delimeter)
+string TrimLeftString(string str)
 {
-	int i = 0;
-	while (str[i] == delimeter)
+	/*int i = 0;
+	while (str[i] == ' ')
 	{
 		i++;
-	}
-	str.erase(0, i);
-	return str;
-	//cout << str << endl;
-}
-string TrimRightString(string str, char delimeter)
-{
-	int size= str.length() - 1;
-	int i = 0;
-	while (str[size-i] == delimeter)
+	}*/
+	//str.erase(0, i);
+	for (int i = 0; i < str.length(); i++)
 	{
-		i++;
+		if(str[i] != ' ')
+			return str.substr(i, str.length()-i);
 	}
-	str.erase(str.length()-i, str.length());
-	return str;
-	//cout << str << endl;
+	return "";
 }
-string TrimAllString(string str, char delimeter)
+string TrimRightString(string str)
 {
-	string word;
-	
-	str = TrimLeftString(str, delimeter);
-	str = TrimRightString(str, delimeter);
-	return str;
+	//int size= str.length() - 1;
+	//int i = 0;
+	//while (str[size-i] == ' ')
+	//{
+	//	i++;
+	//}
+	////str.erase(str.length()-i, str.length());
+	for (int i = str.length()-1; i >=0 ; i--)
+	{
+		if (str[i] != ' ')
+			return str.substr(0, (i + 1));
+	}
+	return "";
+}
+string TrimAllString(string str)
+{
+	return TrimRightString(TrimLeftString(str));
 	/*while (str.find(delimeter) != -1)
 	{
 		word = str.substr(0, str.find(delimeter));
@@ -100,17 +104,17 @@ string TrimAllString(string str, char delimeter)
 
 int main()
 {
-	//       Mohammad Abu-Hadhoud @ProgrammingAdvices     
-	string str = readString();
+	//string str = readString();
+	string str = "    Mohammad Abu-Hadhoud    ";
 
 	
 	//TrimRightString(str, ' ');
 	//TrimAllString(str, ' ');
 
 	cout << "\n================================================\n";
-	cout << "Trim Left  = "; cout << TrimLeftString(str, ' ')<<endl;
-	cout << "Trim Right = "; cout << TrimRightString(str, ' ') << endl;
-	cout << "Trim       = "; cout << TrimAllString(str, ' ')<<endl;
+	cout << "Trim Left  = " << TrimLeftString(str) <<endl;
+	cout << "Trim Right = " << TrimRightString(str) << endl;
+	cout << "Trim       = " << TrimAllString(str) <<endl;
 	cout << "================================================\n";
 
 	
